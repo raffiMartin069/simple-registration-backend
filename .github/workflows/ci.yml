@@ -6,6 +6,15 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+  DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+  DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+  DATABASE_USER: ${{ secrets.DATABASE_USER }}
+  DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
+  DEBUG: False
+
 jobs:
   container-job:
 
@@ -30,14 +39,6 @@ jobs:
     steps:
       
       - uses: actions/checkout@v4
-        env:
-          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
-          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-          DATABASE_USER: ${{ secrets.DATABASE_USER }}
-          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DEBUG: False
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v3
         with:
